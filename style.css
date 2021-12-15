@@ -1,0 +1,44 @@
+body{
+    background-color: #171717;
+    color: #ededed;
+    font-family: Impact, fantasy;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+}
+
+.header{
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.body{
+    background-color: #444;
+    column-fill: inherit;
+    margin-left:auto;
+    margin-right:auto;
+    align-items: center;
+    justify-content: center;
+}
+.body h2{
+    font-size: 22px;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-images img{
+    flex: 1 1 0%;
+    align-items: center;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+img{
+    width: 75px;
+    height: 75px;
+    border-radius: 8px;
+}
