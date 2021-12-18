@@ -2,6 +2,29 @@ let playerScore = 0;
 let compScore = 0;
 let winner = "";
 
+
+//elements by id
+const player = document.getElementById('playerPic')
+const compPlayer = document.getElementById('comPic')
+const pScore = document.getElementById('playerScore')
+const cScore = document.getElementById('compScore')
+const rock = document.getElementById('rockbtn')
+const scissor = document.getElementById('scissorbtn')
+const paper = document.getElementById('paper')
+const headerScore = document.getElementById('scoreInfo')
+const headerMsg = document.getElementById('scoreMessage')
+const endScreen = document.getElementById('endScreen')
+const endButton = document.getElementById('endButton')
+const endOverlay = document.getElementById('endOverlay')
+const endMsg = document.getElementById('endMessage')
+
+// adds event listeners for buttons clicked 
+rockbtn.addEventListener('click', () => click('rock'))
+scissorbtn.addEventListener('click', () => click('scissor'))
+paperbtn.addEventListener('click', () => click('paper'))
+endOverlay.addEventListener('click', () => endScreenClose())
+endButton.addEventListener('click', () => restart())
+
 function computerPlay() {
     let choice = ""
     let rand = Math.floor(Math.random() * 3)
@@ -40,31 +63,16 @@ function playRound(playerChoice, computerChoice) {
     return winner;
 }
 
-// adds event listeners for buttons clicked 
-rockbtn.addEventListener('click', () => click('rock'))
-scissorbtn.addEventListener('click', () => click('scissor'))
-paperbtn.addEventListener('click', () => click('paper'))
-
-
-//elements by id
-const player = document.getElementById('playerPic')
-const compPlayer = document.getElementById('comPic')
-const pScore = document.getElementById('playerScore')
-const cScore = document.getElementById('compScore')
-const rock = document.getElementById('rockbtn')
-const scissor = document.getElementById('scissorbtn')
-const paper = document.getElementById('paper')
-const headerScore = document.getElementById('scoreInfo')
-const headerMsg = document.getElementById('scoreMessage')
-const endMsg = document.getElementById('endScreen')
-const endScreen = document.getElementById('end')
-
-
 function gameOver() {
     return (playerScore === 5) || (compScore === 5)
 }
 
 function click(playerChoice) {
+
+    if(gameOver()){
+        endScreenMsg()
+        endScreenOpen()
+    }
 
     let computerChoice = computerPlay()
     let roundWin = playRound(playerChoice, computerChoice);
@@ -73,6 +81,7 @@ function click(playerChoice) {
     updateScore(roundWin)
 
     if(gameOver()){
+        endScreenMsg()
         endScreenOpen()
     }
 }
@@ -121,11 +130,15 @@ function updateScore(winner){
 function restart(){
     playerScore = 0;
     compScore = 0;
+    pScore.textContent = "Player : 0";
+    cScore.textContent = "Player : 0"
     winner = "";
     player.src = "pics/questionmark.png"
     compPlayer.src = "pics/questionmark.png"
     headerMsg.textContent = "Make your pick"
     headerScore.textContent = "First to get 5 points wins the game"
+    endScreen.classList.remove('on')
+    endOverlay.classList.remove('on')
 
 }
 
@@ -135,10 +148,11 @@ function endScreenMsg(){
 }
 
 function endScreenOpen(){
-    endScreen.classList.add('end')
-    
+    endScreen.classList.add('on')
+    //endOverlay.classList.add('on')
 }
 
 function endScreenClose(){
-    endScreen.classList.add('end')
+    endScreen.classList.remove('on')
+    //endOverlay.classList.remove('on')
 }
