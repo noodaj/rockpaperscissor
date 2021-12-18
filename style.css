@@ -92,15 +92,13 @@ h3{
 }
 
 .end{
-    display:flex;
+    display:none;
     flex-direction: column;
     background-color: #2C2E43;
     width: 250px;
-    margin: 0 auto;
+    margin: 20px auto;
     align-items: center;
     border-radius: 20px;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 200ms ease-in-out;
 }
 
 .end p{
@@ -124,20 +122,5 @@ h3{
 }
 
 .end.on{
-    transform: translate(0%, -150%) scale(1);
-}
-
-.endOverlay{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #2C2E43;
-    opacity: 0.6;
-}
-
-.endOverlay.on{
-    display: block;
+    display:flex;
 }

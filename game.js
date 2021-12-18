@@ -15,7 +15,6 @@ const headerScore = document.getElementById('scoreInfo')
 const headerMsg = document.getElementById('scoreMessage')
 const endScreen = document.getElementById('endScreen')
 const endButton = document.getElementById('endButton')
-const endOverlay = document.getElementById('endOverlay')
 const endMsg = document.getElementById('endMessage')
 
 // adds event listeners for buttons clicked 
@@ -149,10 +148,8 @@ function endScreenMsg(){
 
 function endScreenOpen(){
     endScreen.classList.add('on')
-    //endOverlay.classList.add('on')
 }
 
 function endScreenClose(){
     endScreen.classList.remove('on')
-    //endOverlay.classList.remove('on')
 }
