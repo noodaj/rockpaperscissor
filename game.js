@@ -16,12 +16,11 @@ function computerPlay() {
             choice = "paper";
             break;
     }
-
+    console.log(`Generated "${choice}"`)
     return choice;
 }
 
 function playRound(playerChoice, computerChoice) {
-    let winner = "";
     if (playerChoice == computerChoice) {
         winner = "Tie"
     }
@@ -48,16 +47,18 @@ paperbtn.addEventListener('click', () => click('paper'))
 
 
 //elements by id
-const player = document.getElementById('user')
-const compPlayer = document.getElementById('comp')
+const player = document.getElementById('playerPic')
+const compPlayer = document.getElementById('comPic')
 const pScore = document.getElementById('playerScore')
 const cScore = document.getElementById('compScore')
 const rock = document.getElementById('rockbtn')
 const scissor = document.getElementById('scissorbtn')
 const paper = document.getElementById('paper')
-const headerScore = document.getElementsByClassName('scoreInfo')
-const headerMsg = document.getElementsByClassName('scoreMessage')
-const img = document.querySelector('playerimg')
+const headerScore = document.getElementById('scoreInfo')
+const headerMsg = document.getElementById('scoreMessage')
+const endMsg = document.getElementById('endScreen')
+const endScreen = document.getElementById('end')
+
 
 function gameOver() {
     return (playerScore === 5) || (compScore === 5)
@@ -65,66 +66,79 @@ function gameOver() {
 
 function click(playerChoice) {
 
+    let computerChoice = computerPlay()
+    let roundWin = playRound(playerChoice, computerChoice);
+    console.log(roundWin);
+    updateChoice(playerChoice, computerChoice);
+    updateScore(roundWin)
 
-    let gen = computerPlay()
+    if(gameOver()){
+        endScreenOpen()
+    }
 }
 
 function updateChoice(playerChoice, computerChoice) {
     switch (playerChoice) {
         case 'rock':
-            img.src = "pics/rock.png";
-            break
+            player.src = "pics/rock.png";
+            break;
         case 'paper':
-            img.src = "pics/paper.png"
-            break
+            player.src = "pics/paper.png"
+            break;
         case 'scissor':
-            img.src = "pics/scissor.png"
-            break
-
+            player.src = "pics/scissor.png"
+            break;
     }
 
     switch (computerChoice) {
         case 'rock':
-            img.src = "pics/rock.png";
-            break
+            compPlayer.src = "pics/rock.png";
+            break;
         case 'paper':
-            img.src = "pics/paper.png"
-            break
+            compPlayer.src = "pics/paper.png"
+            break;
         case 'scissor':
-            img.src = "pics/scissor.png"
-            break
-
+            compPlayer.src = "pics/scissor.png"
+            break;
     }
 }
 
 function updateScore(winner){
-    switch(winner){
-        case 'Player':
-            headerScore.textContent = "You won!"
-            break
-        case 'Computer':
-            headerScore.textContent = "You lost!"
-            break
-        default:
-            headerScore.textContent = "It's a tie!"
-            break
+    if(winner === "Tie"){
+        headerScore.textContent = "It's a tie!";
+    }
+    else if (winner === "Player"){
+        headerScore.textContent = "You win!";
+    }
+    else if(winner === "Computer"){
+        headerScore.textContent = "You lost!"
     }
 
+    pScore.textContent = `Player : ${playerScore}`;
+    cScore.textContent = `Computer : ${compScore}`;
+}
+
+function restart(){
+    playerScore = 0;
+    compScore = 0;
+    winner = "";
+    player.src = "pics/questionmark.png"
+    compPlayer.src = "pics/questionmark.png"
+    headerMsg.textContent = "Make your pick"
+    headerScore.textContent = "First to get 5 points wins the game"
 
 }
-function game() {
-    for (i = 0; i < 5; i++) {
-        let input = prompt("What is your selection?");
-        playRound(input, computerPlay());
-    }
 
-    if (playerScore > compScore) {
-        console.log("You won!");
-    }
-    else if (compScore > playerScore) {
-        console.log("Computer won!");
-    }
-    else {
-        console.log("Tie!");
-    }
+function endScreenMsg(){
+    return playerScore > compScore ? 
+    (endMsg.textContent = "You win!") : (endMsg.textContent = "You lost!")
+}
+
+function endScreenOpen(){
+    endScreen.classList.add('end')
+    
+}
+
+function endScreenClose(){
+    endScreen.classList.add('end')
 }

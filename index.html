@@ -17,18 +17,18 @@
 
     <main class="container">
         <div class="body">
-            <h2 class = "scoreInfo" >Make your pick</h2>
-            <h3 class = "scoreMessage">First to get 5 points wins the game</h3>
+            <h2 id = "scoreInfo" >Make your pick</h2>
+            <h3 id = "scoreMessage">First to get 5 points wins the game</h3>
         </div>
 
         <div class="scores-container">
             <div class="player", id = "user">
-                <img class = "playerimg" src="pics/questionmark.png" alt="questionmark">
+                <img class = "playerimg" id = "playerPic" src="pics/questionmark.png" alt="questionmark">
                 <p class = "score", id = "playerScore">Player : 0</p>
             </div>
 
             <div class="player", id = "comp">
-                <img class = "playerimg" src="pics/questionmark.png" alt="questionmark">
+                <img class = "playerimg" id = "comPic" src="pics/questionmark.png" alt="questionmark">
                 <p class = "score", id = "compScore">Computer : 0</p>
             </div>
         </div>
@@ -46,6 +46,13 @@
         </div>
     </main>
 
+    <div class = "end", id = "endScreen">
+        <p id = "endMessage"></p>
+        <button id = "endButton">Play again</button>
+    </div>
+
+    <div id = "endOverlay"></div>
+    
     <footer class="footer">
         <p>Copyright© noodaj</p>
     </footer>
