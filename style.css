@@ -27,7 +27,7 @@ h2,h3{
     font-size: 30px;
 }
 
-.scores{
+.scores-container{
     display:flex;
     justify-content: center;
 }
