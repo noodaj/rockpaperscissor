@@ -2,7 +2,6 @@ let playerScore = 0;
 let compScore = 0;
 let winner = "";
 
-
 //elements by id
 const player = document.getElementById('playerPic')
 const compPlayer = document.getElementById('comPic')
@@ -21,7 +20,6 @@ const endMsg = document.getElementById('endMessage')
 rockbtn.addEventListener('click', () => click('rock'))
 scissorbtn.addEventListener('click', () => click('scissor'))
 paperbtn.addEventListener('click', () => click('paper'))
-endOverlay.addEventListener('click', () => endScreenClose())
 endButton.addEventListener('click', () => restart())
 
 function computerPlay() {
@@ -66,9 +64,25 @@ function gameOver() {
     return (playerScore === 5) || (compScore === 5)
 }
 
+
+let header = (winner, playerChoice, computerChoice) =>{
+    if(winner === "Player"){
+        headerMsg.textContent = `${playerChoice} beats ${computerChoice}`
+    }
+    else if(winner === "Computer"){
+        headerMsg.textContent = `${playerChoice} is beaten by ${computerChoice}`
+    }
+    else{
+        headerMsg.textContent =  `${playerChoice} ties with ${computerChoice} `
+    }
+}
+
 function click(playerChoice) {
 
     if(gameOver()){
+        rockbtn.disabled = true;
+        scissorbtn.disabled = true;
+        paperbtn.disabled = true;
         endScreenMsg()
         endScreenOpen()
     }
@@ -78,8 +92,12 @@ function click(playerChoice) {
     console.log(roundWin);
     updateChoice(playerChoice, computerChoice);
     updateScore(roundWin)
-
+    header(winner,playerChoice,computerChoice);
+    
     if(gameOver()){
+        rockbtn.disabled = true;
+        scissorbtn.disabled = true;
+        paperbtn.disabled = true;
         endScreenMsg()
         endScreenOpen()
     }
@@ -136,8 +154,10 @@ function restart(){
     compPlayer.src = "pics/questionmark.png"
     headerMsg.textContent = "Make your pick"
     headerScore.textContent = "First to get 5 points wins the game"
-    endScreen.classList.remove('on')
-    endOverlay.classList.remove('on')
+    endScreenClose()
+    rockbtn.disabled = false;
+    scissorbtn.disabled = false;
+    paperbtn.disabled = false;
 
 }
 
